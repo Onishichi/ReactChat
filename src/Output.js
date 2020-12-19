@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import Log from "./Log"
 import { SocketContext } from "./socket";
 
+const MAX_LOG_ARR_LENGTH = 10;
+
 function Output() {
   const [logArr, setLogArr] = useState([]);
   const socket = useContext(SocketContext);
@@ -11,24 +13,26 @@ function Output() {
       "message",
       ( { user, text, date } ) =>
       {
-        const objArr = [
-          ...logArr,
+        let newLogArr = [    
           {
             user: user,
             text: text,
             key: date,
           },
+          ...logArr,
         ];
-        setLogArr( objArr );
-        console.log( objArr );
-      },
-      []
+        if ( newLogArr.length > MAX_LOG_ARR_LENGTH )
+        {
+          newLogArr.pop();
+        }
+        setLogArr( newLogArr );
+      }
     );
-  } );
-
-  const logs = logArr.map( ( log ) =>
-    <Log key={ log.key } user={ log.user } text={log.text} />
-    );
+    return () =>
+    {
+      socket.off( "message" );
+    }
+  });
 
   return (
     <div>
