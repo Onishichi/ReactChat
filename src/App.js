@@ -5,10 +5,10 @@ import { SocketProvider } from "./socket";
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <SocketProvider>
-        <Input />
         <Output />
+        <Input />
       </SocketProvider>
     </div>
   );

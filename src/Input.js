@@ -6,7 +6,9 @@ function Input() {
   const socket = useContext(SocketContext);
 
   //textbox更新時に呼ばれる
-  const handleChange = (event) => {
+  const handleChange = ( event ) =>
+  {
+    event.preventDefault();
     setText(event.target.value);
   };
 
@@ -23,9 +25,9 @@ function Input() {
   };
 
   return (
-    <div>
+    <div className="input">
       <form onSubmit={handleSubmit}>
-        <input type="text" onChange={handleChange} value={text} />
+        <input className="textbox" type="text" onChange={handleChange} value={text} />
       </form>
     </div>
   );

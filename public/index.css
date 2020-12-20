@@ -1,0 +1,55 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.app {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.app .output{
+    background-color: #222222;
+    height: calc(100% - 1em);
+    width: 100%;
+    color: white;
+    font-size: medium;
+    overflow: auto;
+}
+
+.app .output .logs{
+    margin:0;
+    list-style: none;
+    padding-left: 0;
+}
+
+.app .input{
+    width: 100%;
+    line-height: 0;
+}
+
+.app .input .textbox {
+    color: white;
+    font-size: medium;
+    background-color: #444444;
+    border: none;
+    outline: none;
+    width: 100%;
+    line-height: 0;
+    margin: 0;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+}
