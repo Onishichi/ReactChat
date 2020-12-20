@@ -9,6 +9,7 @@ function Output() {
 	const socket = useContext( SocketContext );
 	const [ scroll, setScroll ] = useScroll();
 	const outputElement = useRef( null );
+	const logsElement = useRef( null );
 
 	useEffect( () =>
 	{
@@ -40,21 +41,22 @@ function Output() {
 
 	useEffect( () =>
 	{
-		let logHeight;
-		try
+		const logs = logsElement.current;
+		if ( logs === null )
 		{
-			console.log( outputElement.current.firstChild.firstChild.clientHeight );
-			logHeight = outputElement.current.firstChild.firstChild.clientHeight;
+			return;
 		}
-		finally
+		const log = logs.firstChild;
+		if ( log === null )
 		{
-			if ( logHeight !== null && outputElement.current !== null && scroll.vertical > 0 )
-			{
-				setScroll( outputElement.current, scroll.horizontal, scroll.vertical + logHeight );
-			}
+			return;
 		}
-
-	},[logArr]);
+		const logHeight = log.clientHeight;
+		if ( logHeight !== null && outputElement.current !== null && scroll.vertical > 0 )
+		{
+			setScroll( outputElement.current, scroll.horizontal, scroll.vertical + logHeight );
+		}
+	}, [logArr] );
 
 	const handleScroll = (event) =>
 	{
